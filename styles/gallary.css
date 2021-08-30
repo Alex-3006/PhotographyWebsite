@@ -1,0 +1,30 @@
+.gallary {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.imgsection {
+  padding: 1rem;
+  margin: 0;
+  height: 20rem;
+  width: 30rem;
+}
+
+.imgtitel {
+  font-size: 1.4rem;
+  padding: 1rem;
+  z-index: 1;
+}
+
+.gallaryimg {
+  width: 80%;
+  height: 80%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+}

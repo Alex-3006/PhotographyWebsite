@@ -1,233 +1,213 @@
-import Head from 'next/head'
-import { connectToDatabase } from '../util/mongodb'
+import Categories from "./data/categories.json";
+import Link from "next/link";
+import Header from "./layout/header";
+import Footer from "./layout/footer";
 
-export default function Home({ isConnected }) {
+const index = () => {
+  function onHoverImgAddHandler(event) {
+    event.target.classList.add("infoimageHover");
+  }
+
+  function onHoverImgRemoveHandler(event) {
+    event.target.classList.remove("infoimageHover");
+  }
+
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js with MongoDB!</a>
-        </h1>
-
-        {isConnected ? (
-          <h2 className="subtitle">You are connected to MongoDB</h2>
-        ) : (
-          <h2 className="subtitle">
-            You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-            for instructions.
-          </h2>
-        )}
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
+    <>
+      <Header />
+      <div className="startingimg content">
+        <p src="../../assets/IMG_1531.JPG" alt="" className="img"></p>
+        <h2 className="headline">I shoot photographs for any needs</h2>
+        <Link href="/about">
+          <button className="aboutButton">ABOUT ME</button>
+        </Link>
+      </div>
+      <div className="shortinfos">
+        <h1 className="shortinfotitle">Who am I?</h1>
+        <div className="shortinfoscontainer">
+          <div className="shortinfotext">
+            <h2>
+              I’m a freelance photographer specializing in landscape,
+              advertorial and conceptual photography, based near Frankfurt am
+              Main. I love to turn ideas into beautiful things.
+            </h2>
+          </div>
+          <div className="box bg-opacity-dark inverse-text">
+            <div className="row">
+              <div className="col-sm-4">
+                <h3>My Skills</h3>
+                <ul className="progress-list">
+                  <li>
+                    <p>Landscape Photography</p>
+                    <div
+                      className="progressbar line border yellow"
+                      data-value="90"
+                    >
+                      <svg
+                        viewBox="0 0 100 3"
+                        preserveAspectRatio="none"
+                        className="svg"
+                      >
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#eee"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                        ></path>
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#555"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                          className="path1"
+                        ></path>
+                      </svg>
+                      <div className="progressbar-text div">90 %</div>
+                    </div>
+                  </li>
+                  <li>
+                    <p>DaVinci Resolve</p>
+                    <div
+                      className="progressbar line border pink"
+                      data-value="80"
+                    >
+                      <svg
+                        viewBox="0 0 100 3"
+                        preserveAspectRatio="none"
+                        className="svg"
+                      >
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#eee"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                        ></path>
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#555"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                          className="path2"
+                        ></path>
+                      </svg>
+                      <div className="progressbar-text div">80 %</div>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Portrait Photography</p>
+                    <div
+                      className="progressbar line border purple"
+                      data-value="85"
+                    >
+                      <svg
+                        viewBox="0 0 100 3"
+                        preserveAspectRatio="none"
+                        className="svg"
+                      >
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#eee"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                        ></path>
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#555"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                          className="path3"
+                        ></path>
+                      </svg>
+                      <div className="progressbar-text div">85 %</div>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Long Exsposure Photography</p>
+                    <div
+                      className="progressbar line border brown"
+                      data-value="65"
+                    >
+                      <svg
+                        viewBox="0 0 100 3"
+                        preserveAspectRatio="none"
+                        className="svg"
+                      >
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#eee"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                        ></path>
+                        <path
+                          d="M 0,1.5 L 100,1.5"
+                          stroke="#555"
+                          strokeWidth="3"
+                          fillOpacity="0"
+                          className="path4"
+                        ></path>
+                      </svg>
+                      <div className="progressbar-text div">65 %</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="categories">
+        {Categories.map((project) => (
+          <div className="subclass" key={project.id}>
+            <h2 className="categorietitle">{project.title}</h2>
+            <h4 className="categorietext">{project.description}</h4>
+          </div>
+        ))}
+      </div>
+      <div className="projectsInfo">
+        {Categories.map((project) => (
+          <Link href={project.path} key={project.id}>
+            <div className="infosections">
+              <h1 className="infotext">{project.title}</h1>
+              <img src={project.img} className="infoimage" alt="" />
+            </div>
+          </Link>
+        ))}
+        <div className="moreInfo">
+          <Link href="/gallary" className="infolink">
+            <h2 className="moreInfotext">View all projects</h2>
+          </Link>
+          <hr className="moreInfohr" />
+        </div>
+      </div>
+      <div className="follow">
+        <img
+          src="../../assets/IMG_2034_cropped.jpg"
+          alt=""
+          className="followimg"
+        ></img>
+        <hr className="followhr" />
+        <h2 className="followtext">Follow me on social media</h2>
+        <div className="icons">
           <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
+            href="https://www.instagram.com/alexsp3066/"
+            className="followicon"
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            <i className="fa fa-instagram"></i>
           </a>
-
+          <a href="https://twitter.com/Alex55578024" className="followicon">
+            <i className="fa fa-twitter"></i>
+          </a>
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
+            href="https://www.facebook.com/alexandru.matei.sporis"
+            className="followicon"
           >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            <i className="fa fa-facebook"></i>
           </a>
         </div>
-      </main>
+      </div>
+      <Footer />
+    </>
+  );
+};
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .subtitle {
-          font-size: 2rem;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
-}
-
-export async function getServerSideProps(context) {
-  const { client } = await connectToDatabase()
-
-  const isConnected = await client.isConnected()
-
-  return {
-    props: { isConnected },
-  }
-}
+export default index;
