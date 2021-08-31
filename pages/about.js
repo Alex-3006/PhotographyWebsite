@@ -61,7 +61,7 @@ const about = () => {
                                             </div>
                                         </li>
                                         <li>
-                                            <p>Long Exsposure P.</p>
+                                            <p>Long Exposure P.</p>
                                             <div className="progressbar line border brown" data-value="65">
                                                 <svg viewBox="0 0 100 3" preserveAspectRatio="none" className="svg">
                                                     <path d="M 0,1.5 L 100,1.5" stroke="#eee" strokeWidth="3" fillOpacity="0"></path>

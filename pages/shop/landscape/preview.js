@@ -4,18 +4,20 @@ import Footer from "../../layout/footer";
 import { useRouter } from "next/router";
 import Data from "../../data/data.json";
 import Link from "next/link";
+import shoppingCartData from "../../data/shoppingCart.json";
 
 const preview = () => {
   const [el, setEl] = useState(null);
   const sizeRef = useRef(null);
   const quantityRef = useRef(null);
   const borderRef = useRef(null);
-
   const router = useRouter();
   const { asPath } = router;
 
   let goodid = asPath.substr(27, 62);
   let elm;
+
+  let data;
 
   useEffect(() => {
     elm = Data.filter((element) => goodid === element.id);
@@ -23,6 +25,29 @@ const preview = () => {
       setEl(elm[0]);
     }
   }, []);
+
+  if (sizeRef.current != null) {
+    data = {
+      quanitiy: quantityRef.current && quantityRef.current.selectedIndex,
+      size: sizeRef.current && sizeRef.current.selectedIndex,
+      border: borderRef.current && borderRef.current.selectedIndex,
+      img: goodid,
+    };
+  }
+
+  const sendInfosHandler = () => {
+    if (
+      sizeRef.current.selectedIndex == 0 &&
+      quantityRef.current.selectedIndex == 0 &&
+      borderRef.current.selectedIndex == 0
+    ) {
+      alert("You haven't filled all boxes \n(Size, Quantity and Border)");
+      location.reload();
+    } else {
+      let res = JSON.stringify(data);
+      // write to json file
+    }
+  };
 
   return (
     <>
@@ -38,16 +63,18 @@ const preview = () => {
           <div className="prewtextsection">
             <h1 className="prevtitle">{el && el.titleeng}</h1>
             <h1 className="prevpricetag">
-              {sizeRef.current &&
-                (sizeRef.current.selectedIndex == 0
-                  ? "from 50€"
-                  : sizeRef.current.selectedIndex == 1
-                  ? "50€"
-                  : sizeRef.current.selectedIndex == 2
-                  ? "75€"
-                  : sizeRef.current.selectedIndex == 3
-                  ? "100€"
-                  : null)}
+              <h2 className="prevprice">
+                {sizeRef.current &&
+                  (sizeRef.current.selectedIndex == 0
+                    ? "from 50€"
+                    : sizeRef.current.selectedIndex == 1
+                    ? "50€"
+                    : sizeRef.current.selectedIndex == 2
+                    ? "75€"
+                    : sizeRef.current.selectedIndex == 3
+                    ? "100€"
+                    : null)}
+              </h2>
               <span className="prevothercosts">
                 All other costs at the checkout
               </span>
@@ -89,21 +116,12 @@ const preview = () => {
                   <option value="3">Black</option>
                 </select>
               </div>
-              <Link
-                href={{
-                  pathname: "/shoppingCart/",
-                  query: {
-                    quanitiy: quantityRef.current && quantityRef.current.selectedIndex,
-                    size: sizeRef.current && sizeRef.current.selectedIndex,
-                    border: borderRef.current && borderRef.current.selectedIndex,
-                    img: goodid,
-                  },
-                }}
-              >
+              <Link href="/shoppingCart/">
                 <input
                   type="submit"
                   value="Add to cart"
                   className="prevsubmit"
+                  onClick={sendInfosHandler}
                 />
               </Link>
             </div>

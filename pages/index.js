@@ -122,7 +122,7 @@ const index = () => {
                     </div>
                   </li>
                   <li>
-                    <p>Long Exsposure Photography</p>
+                    <p>Long Exposure Photography</p>
                     <div
                       className="progressbar line border brown"
                       data-value="65"
